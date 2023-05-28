@@ -1,34 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+import 'constant/custom_icon.dart';
+import 'homepage.dart';
+
+class BottomNav extends StatefulWidget {
+  const BottomNav({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BottomNav> createState() => _BottomNavState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
+class _BottomNavState extends State<BottomNav> {
+  final page = [HomePage()];
+  final dynamic _bottomNavIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(widget.title),
+            leadingWidth: 200,
+            leading: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: CircleAvatar(
+                      radius: 17,
+                      child: Image.asset("assets/img/pall_new.png"), //Text
+                    ), //CircleAvatar
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: const [
+                        Text(
+                          "Shop for",
+                          style: TextStyle(color: Colors.black, fontSize: 13),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.black,
+                          size: 17,
+                        )
+                      ],
+                    ),
+                    const Text(
+                      "All",
+                      style: TextStyle(color: Colors.black, fontSize: 11),
+                    )
+                  ],
+                )
+              ],
+            ),
+            backgroundColor: Colors.white,
+            actions: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  SearchIcon.search,
+                  color: Colors.black,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(IconCustom.heart_empty, color: Colors.black),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(IconCustom.cart, color: Colors.black),
+              ),
+            ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.white,
-            // selectedLabelStyle: AppThemes().textThemes.headline1,
-            // unselectedLabelStyle: AppThemes().textThemes.headline1,
             type: BottomNavigationBarType.fixed,
             selectedItemColor: HexColor('#ff7043'),
             unselectedItemColor: Colors.black,
             currentIndex: 0,
-            // onTap: _onItemTapped,
             items: [
               BottomNavigationBarItem(
                   icon: Padding(
@@ -36,38 +90,33 @@ class _MyHomePageState extends State<MyHomePage> {
                     child:
                         Icon(Icons.home, size: 18, color: HexColor('#ff7043')),
                   ),
-                  label: ' Home'),
+                  label: 'Shopping'),
               const BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(bottom: 4),
                     child: Icon(Icons.play_circle_fill_outlined, size: 18),
                   ),
-                  label: '   Movies'),
-              BottomNavigationBarItem(
+                  label: 'Explore'),
+              const BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.heart_broken_sharp,
-                        size: 18, color: HexColor('#ff7043')),
+                    padding: EdgeInsets.only(bottom: 4),
+                    child: Icon(IconCustom.heart_empty,
+                        size: 18, color: Colors.black),
                   ),
-                  label: ' Theatres'),
-              BottomNavigationBarItem(
+                  label: 'Parenting'),
+              const BottomNavigationBarItem(
                   icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Icon(Icons.abc_sharp,
-                        size: 18, color: HexColor('#ff7043')),
+                    padding: EdgeInsets.only(bottom: 4),
+                    child: Icon(IconCustom.user_outline,
+                        size: 18, color: Colors.black),
                   ),
-                  label: '    Booking'),
-              BottomNavigationBarItem(
-                  icon: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 8.0, bottom: 9, top: 8),
-                    child:
-                        Icon(Icons.more, size: 8, color: HexColor('#ff7043')),
-                  ),
-                  label: '      More'),
+                  label: 'Profile'),
+              const BottomNavigationBarItem(
+                  icon: Icon(IconCustom.menu, size: 18, color: Colors.black),
+                  label: 'Menu'),
             ],
           ),
-          body: Column()),
+          body: page[_bottomNavIndex]),
     );
   }
 }
