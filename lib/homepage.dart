@@ -1,15 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firstcry/grid.dart';
 import 'package:firstcry/slider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import 'constant/custom_icon.dart';
 import 'constant/dummy.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,8 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
         children: [
@@ -68,7 +64,9 @@ class _HomePageState extends State<HomePage> {
                               home: home[index]['listBanner'],
                               slider: carouselController)
                           : type == 'advertisment'
-                              ? const Advertisement()
+                              ? Advertisement(
+                                  home: home[index]['listBanner'],
+                                  type: home[index]['isCard'])
                               : type == 'grid'
                                   ? GridItem(
                                       home: home[index]['gridImage'],
@@ -87,28 +85,38 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// ignore: must_be_immutable
 class Advertisement extends StatelessWidget {
+  final List home;
+
+  final bool type;
+
   const Advertisement({
     Key? key,
+    required this.home,
+    required this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 10,
+      height: type != true
+          ? MediaQuery.of(context).size.height / 10
+          : MediaQuery.of(context).size.height / 3.5,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: home.length,
           itemBuilder: ((context, index) {
             return Container(
                 margin: const EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width - 50,
-                height: 10,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(9)),
+                width: type != true
+                    ? MediaQuery.of(context).size.width - 50
+                    : MediaQuery.of(context).size.width - 250,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(9)),
                     image: DecorationImage(
-                      image: AssetImage("assets/img/adv.png"),
+                      image: AssetImage(home[index]["image_path"]),
                       fit: BoxFit.fill,
                     )));
           })),
@@ -117,12 +125,11 @@ class Advertisement extends StatelessWidget {
 }
 
 class BannerImage extends StatelessWidget {
-  var home;
-
-  BannerImage({
+  const BannerImage({
     Key? key,
     this.home,
   }) : super(key: key);
+  final dynamic home;
   @override
   Widget build(BuildContext context) {
     return Container(

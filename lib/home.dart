@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'constant/custom_icon.dart';
+import 'constant/utlities.dart';
 import 'homepage.dart';
 
 class BottomNav extends StatefulWidget {
@@ -14,7 +15,7 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  final page = [HomePage()];
+  final page = [const HomePage()];
   final dynamic _bottomNavIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -60,21 +61,7 @@ class _BottomNavState extends State<BottomNav> {
             ),
             backgroundColor: Colors.white,
             actions: const [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  SearchIcon.search,
-                  color: Colors.black,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(IconCustom.heart_empty, color: Colors.black),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(IconCustom.cart, color: Colors.black),
-              ),
+              UtiLties(type: "home"),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -100,14 +87,14 @@ class _BottomNavState extends State<BottomNav> {
               const BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(IconCustom.heart_empty,
+                    child: Icon(IconCustom.heartempty,
                         size: 18, color: Colors.black),
                   ),
                   label: 'Parenting'),
               const BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(bottom: 4),
-                    child: Icon(IconCustom.user_outline,
+                    child: Icon(IconCustom.useroutline,
                         size: 18, color: Colors.black),
                   ),
                   label: 'Profile'),

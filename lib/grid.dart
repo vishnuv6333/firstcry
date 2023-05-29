@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class GridItem extends StatelessWidget {
-  GridItem(
+  const GridItem(
       {Key? key,
       required this.home,
       required this.category,
       required this.columCount})
       : super(key: key);
-  List home;
-  bool category;
-  int columCount;
+  final List home;
+  final bool category;
+  final int columCount;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.only(bottom: 4),
+      padding: const EdgeInsets.only(bottom: 4),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: home.length,

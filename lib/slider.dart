@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firstcry/product/productpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Sliders extends StatefulWidget {
-  Sliders({Key? key, required this.home, this.slider}) : super(key: key);
-  List home;
-  var slider;
+  const Sliders({Key? key, required this.home, required this.slider})
+      : super(key: key);
+  final List home;
+  // ignore: prefer_typing_uninitialized_variables
+  final slider;
 
   @override
   State<Sliders> createState() => _SlidersState();
@@ -17,7 +21,9 @@ class _SlidersState extends State<Sliders> {
     return Stack(
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.to(const ProductPage());
+          },
           child: CarouselSlider(
             items: widget.home
                 .map(

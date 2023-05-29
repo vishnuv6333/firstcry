@@ -6,9 +6,9 @@ class IconCustom {
   static const _kFontFam = 'Icons';
   static const String? _kFontPkg = null;
 
-  static const IconData user_outline =
+  static const IconData useroutline =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData heart_empty =
+  static const IconData heartempty =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData menu =
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -35,5 +35,15 @@ class Location {
   static const String? _kFontPkg = null;
 
   static const IconData location =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+}
+
+class Share {
+  Share._();
+
+  static const _kFontFam = 'share_icons';
+  static const String? _kFontPkg = null;
+
+  static const IconData share =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
